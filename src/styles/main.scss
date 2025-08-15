@@ -1,0 +1,17 @@
+@use 'variables/colors';
+@use 'variables/spacing';
+@use 'components/login';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'Roboto',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
