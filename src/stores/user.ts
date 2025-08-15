@@ -17,10 +17,8 @@ export const useUserStore = defineStore('user', () => {
         const user = JSON.parse(savedUser)
         currentUser.value = user
         isAuthenticated.value = true
-        console.log('👤 User loaded from localStorage:', user)
       }
     } catch (error) {
-      console.error('Failed to load user from localStorage:', error)
       // Clear corrupted data
       localStorage.removeItem('todo-user')
       localStorage.removeItem('todo-auth')
@@ -32,7 +30,6 @@ export const useUserStore = defineStore('user', () => {
     try {
       localStorage.setItem('todo-user', JSON.stringify(user))
       localStorage.setItem('todo-auth', 'true')
-      console.log('👤 User saved to localStorage')
     } catch (error) {
       console.error('Failed to save user to localStorage:', error)
     }
@@ -43,7 +40,6 @@ export const useUserStore = defineStore('user', () => {
     try {
       localStorage.removeItem('todo-user')
       localStorage.removeItem('todo-auth')
-      console.log('👤 User cleared from localStorage')
     } catch (error) {
       console.error('Failed to clear user from localStorage:', error)
     }
@@ -65,14 +61,12 @@ export const useUserStore = defineStore('user', () => {
     currentUser.value = user
     isAuthenticated.value = true
     saveUserToStorage(user)
-    console.log('👤 User set in store:', user)
   }
 
   const clearUser = () => {
     currentUser.value = null
     isAuthenticated.value = false
     clearUserFromStorage()
-    console.log('👤 User cleared from store')
   }
 
   const login = (user: User) => {

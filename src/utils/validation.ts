@@ -21,24 +21,16 @@ export const createValidator = (
   errorMsg: string,
 ): (() => boolean) => {
   return (): boolean => {
-    console.log(`🔍 Validating field "${field}":`, data[field])
-
     if (!data[field]) {
       const requiredMsg = VALIDATION_MESSAGES.REQUIRED(field)
-      console.log(`❌ Field "${field}" is empty:`, requiredMsg)
       errors[field] = requiredMsg
     } else if (!pattern.test(String(data[field]))) {
-      console.log(`❌ Field "${field}" doesn't match pattern:`, errorMsg)
-      console.log(`🔍 Pattern:`, pattern)
-      console.log(`🔍 Value:`, data[field])
       errors[field] = errorMsg
     } else {
-      console.log(`✅ Field "${field}" is valid`)
       errors[field] = ''
     }
 
     const isValid = !errors[field]
-    console.log(`📊 Validation result for "${field}":`, isValid)
     return isValid
   }
 }
@@ -48,7 +40,6 @@ export const validateUsername = (
   data: { username: string },
   errors: { username: string },
 ): boolean => {
-  console.log('🔍 Validating username with pattern:', VALIDATION_PATTERNS.USERNAME)
   return createValidator(
     data,
     errors,
@@ -62,7 +53,6 @@ export const validatePhone = (
   data: { phoneNumber: string },
   errors: { phoneNumber: string },
 ): boolean => {
-  console.log('🔍 Validating phone with pattern:', VALIDATION_PATTERNS.PHONE)
   return createValidator(
     data,
     errors,

@@ -21,10 +21,8 @@ export function useAuth() {
       if (savedUser && savedAuth === 'true') {
         const user = JSON.parse(savedUser)
         userStore.setUser(user)
-        console.log('🔐 Authentication restored from localStorage')
       }
     } catch (error) {
-      console.error('Failed to restore authentication:', error)
       // Clear corrupted data
       localStorage.removeItem('todo-user')
       localStorage.removeItem('todo-auth')
@@ -34,26 +32,21 @@ export function useAuth() {
   }
 
   const login = async (credentials: LoginCredentials): Promise<LoginResponse> => {
-    console.log('🚀 Starting login process...')
     isLoading.value = true
     loginError.value = ''
 
     try {
-      console.log('📡 Calling AuthService.login...')
       const response = await authService.login(credentials)
 
       if (response.success && response.user) {
-        console.log('🎉 Login successful!')
         userStore.login(response.user)
         loginError.value = ''
         return response
       } else {
-        console.log('💥 Login failed:', response.error)
         loginError.value = response.error || ERROR_MESSAGES.LOGIN_ERROR
         return response
       }
     } catch {
-      console.log('🌐 Network error in useAuth')
       loginError.value = ERROR_MESSAGES.NETWORK_ERROR
       return {
         success: false,
@@ -61,13 +54,11 @@ export function useAuth() {
       }
     } finally {
       isLoading.value = false
-      console.log('🏁 Login process completed')
     }
   }
 
   const logout = () => {
     userStore.logout()
-    console.log('🚪 User logged out')
   }
 
   const clearError = () => {

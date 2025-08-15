@@ -193,8 +193,6 @@ const handleCreateTodo = async () => {
     // Reset form
     newTodo.title = ''
     newTodo.userId = 1
-
-    console.log('✅ Todo created successfully')
   } catch (err) {
     console.error('Failed to create todo:', err)
   } finally {

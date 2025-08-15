@@ -28,3 +28,9 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Personal notes and documentation
+CURRENT_STATE.md
+INTERVIEW_NOTES.md
+notes/
+*.notes

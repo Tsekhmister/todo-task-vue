@@ -137,7 +137,6 @@ const isProfileMenuOpen = ref(false)
 
 // Initialize authentication on component mount
 onMounted(() => {
-  console.log('🏠 Home component mounted, checking authentication...')
   initializeAuth()
 })
 

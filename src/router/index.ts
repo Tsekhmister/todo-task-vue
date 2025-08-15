@@ -57,7 +57,6 @@ router.beforeEach((to, from, next) => {
     const savedAuth = localStorage.getItem('todo-auth')
 
     if (!savedUser || savedAuth !== 'true') {
-      console.log('🚫 Access denied, redirecting to login')
       next(ROUTE_PATHS.LOGIN)
       return
     }
@@ -69,7 +68,6 @@ router.beforeEach((to, from, next) => {
     const savedAuth = localStorage.getItem('todo-auth')
 
     if (savedUser && savedAuth === 'true') {
-      console.log('✅ User already authenticated, redirecting to home')
       next(ROUTE_PATHS.HOME)
       return
     }

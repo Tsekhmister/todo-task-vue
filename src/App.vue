@@ -13,7 +13,6 @@ const { initializeAuth } = useAuth()
 
 // Initialize authentication state when app loads
 onMounted(() => {
-  console.log('🚀 App mounted, initializing authentication...')
   initializeAuth()
 })
 </script>

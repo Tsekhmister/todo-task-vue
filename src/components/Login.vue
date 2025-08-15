@@ -123,12 +123,10 @@ const userStore = useUserStore()
 
 // Check if user is already authenticated
 onMounted(() => {
-  console.log('🔐 Login component mounted, checking authentication...')
   initializeAuth()
 
   // If user is already authenticated, redirect to home
   if (userStore.getIsAuthenticated) {
-    console.log('✅ User already authenticated, redirecting to home')
     router.push(ROUTE_PATHS.HOME)
   }
 })
@@ -145,43 +143,30 @@ const errors = reactive<LoginErrors>({
 
 // Validation functions using utilities
 const validateUsernameField = (): boolean => {
-  console.log('🔍 Validating username:', formData.username)
   clearError()
   const result = validateUsername(formData, errors)
-  console.log('✅ Username valid:', result, 'Error:', errors.username)
   return result
 }
 
 const validatePhoneField = (): boolean => {
-  console.log('🔍 Validating phone:', formData.phoneNumber)
   clearError()
   const result = validatePhone(formData, errors)
-  console.log('✅ Phone valid:', result, 'Error:', errors.phoneNumber)
   return result
 }
 
 // Handle form submission with validation
 const handleLogin = async (): Promise<void> => {
-  console.log('📝 Starting login form processing...')
-  console.log('📋 Form data:', formData)
-
   const isUsernameValid: boolean = validateUsernameField()
   const isPhoneValid: boolean = validatePhoneField()
 
-  console.log('🔍 Validation results:', { isUsernameValid, isPhoneValid })
-
   if (isUsernameValid && isPhoneValid) {
-    console.log('✅ All fields are valid, sending login request...')
     const response = await login({
       username: formData.username,
       phoneNumber: formData.phoneNumber,
     })
 
     if (response.success && response.user) {
-      console.log('Login successful, redirecting to home page')
       router.replace(ROUTE_PATHS.HOME)
-    } else {
-      console.log('💥 Login failed, staying on login page')
     }
   } else {
     console.log('❌ Form is not valid, showing errors')

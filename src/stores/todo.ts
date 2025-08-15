@@ -92,10 +92,8 @@ export const useTodoStore = defineStore('todo', () => {
     try {
       const fetchedTodos = await todoService.getTodos()
       todos.value = fetchedTodos
-      console.log('📋 Todos loaded successfully:', fetchedTodos.length)
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to fetch todos'
-      console.error('Error fetching todos:', err)
     } finally {
       isLoading.value = false
     }
@@ -108,11 +106,9 @@ export const useTodoStore = defineStore('todo', () => {
     try {
       const newTodo = await todoService.createTodo(todoData)
       todos.value.unshift(newTodo) // Add to beginning of array
-      console.log('✅ Todo created successfully:', newTodo)
       return newTodo
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to create todo'
-      console.error('Error creating todo:', err)
       throw err
     } finally {
       isLoading.value = false
@@ -127,7 +123,6 @@ export const useTodoStore = defineStore('todo', () => {
       favorites.value.push(todoId)
     }
     saveFavorites()
-    console.log('⭐ Favorites updated:', favorites.value)
   }
 
   const isFavorite = (todoId: number) => {
@@ -136,7 +131,6 @@ export const useTodoStore = defineStore('todo', () => {
 
   const updateFilters = (newFilters: Partial<TodoFilters>) => {
     filters.value = { ...filters.value, ...newFilters }
-    console.log('🔍 Filters updated:', filters.value)
   }
 
   const clearFilters = () => {
@@ -145,7 +139,6 @@ export const useTodoStore = defineStore('todo', () => {
       userId: 'all',
       searchQuery: '',
     }
-    console.log('🧹 Filters cleared')
   }
 
   return {

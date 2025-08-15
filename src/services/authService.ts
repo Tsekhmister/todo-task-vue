@@ -21,14 +21,8 @@ export class AuthService {
       const users = await response.json()
       const firstUser = users[0]
 
-      // Log all users for debugging
-      console.log('🔍 All available users:', users)
-      console.log('🔍 First user:', firstUser)
-      console.log('📊 Number of users:', users.length)
-
       return users
     } catch (error) {
-      console.error('Error fetching users:', error)
       throw new Error(ERROR_MESSAGES.FETCH_FAILED)
     }
   }
@@ -37,9 +31,6 @@ export class AuthService {
     try {
       const users = await this.getUsers()
 
-      // Log login attempt data
-      console.log('🔑 Login attempt with credentials:', credentials)
-
       const user = users.find(
         (user) =>
           user.username.toLowerCase() === credentials.username.toLowerCase() &&
@@ -47,33 +38,17 @@ export class AuthService {
       )
 
       if (user) {
-        console.log('✅ User found:', user)
         return {
           success: true,
           user,
         }
       } else {
-        console.log('❌ User not found')
-        console.log('🔍 Looking for:', {
-          username: credentials.username,
-          phone: credentials.phoneNumber,
-        })
-        console.log(
-          '📋 Available usernames:',
-          users.map((u) => u.username),
-        )
-        console.log(
-          '📋 Available phones:',
-          users.map((u) => u.phone),
-        )
-
         return {
           success: false,
           error: ERROR_MESSAGES.LOGIN_ERROR,
         }
       }
     } catch {
-      console.log('🌐 Network error during login attempt')
       return {
         success: false,
         error: ERROR_MESSAGES.NETWORK_ERROR,

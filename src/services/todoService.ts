@@ -19,11 +19,9 @@ export class TodoService {
       }
 
       const todos = await response.json()
-      console.log('📋 Fetched todos:', todos.length)
 
       return todos
     } catch (error) {
-      console.error('Error fetching todos:', error)
       throw new Error(ERROR_MESSAGES.FETCH_FAILED)
     }
   }
@@ -43,11 +41,9 @@ export class TodoService {
       }
 
       const createdTodo = await response.json()
-      console.log('✅ Created todo:', createdTodo)
 
       return createdTodo
     } catch (error) {
-      console.error('Error creating todo:', error)
       throw new Error('Failed to create todo')
     }
   }
